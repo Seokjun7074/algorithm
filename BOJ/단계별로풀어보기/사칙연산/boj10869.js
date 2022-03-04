@@ -1,8 +1,6 @@
 const fs = require("fs");
-const input =
-  process.platform === "linux"
-    ? fs.readFileSync("/dev/stdin").toString().split(" ")
-    : fs.readFileSync("./input.txt").toString().split(" ");
+const filepath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+const input = fs.readFileSync(filepath).toString().split(" ");
 
 const a = parseInt(input[0]);
 const b = parseInt(input[1]);
