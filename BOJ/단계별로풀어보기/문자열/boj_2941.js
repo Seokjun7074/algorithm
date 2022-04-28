@@ -6,5 +6,6 @@ let input = fs.readFileSync(filepath).toString().trim();
 let croatia = ["c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="];
 for (let e of croatia) {
   input = input.split(e).join("0");
+  console.log(input);
 }
 console.log(input.length);
