@@ -46,7 +46,7 @@ for (let i = 0; i < T; i++) {
       house[i][j] = house[i - 1][j] + house[i][j - 1];
     }
   }
-
+  // console.log(house);
   // k층 n호의 인원수 출력
   console.log(house[k][n]);
 }
