@@ -6,7 +6,7 @@ let N = Number(input[0]);
 let nums = input[1].split(" ").map((v) => Number(v));
 let answer = 0;
 
-for (let i = 0; i < nums.length; i++) {
+for (let i = 0; i < N; i++) {
   if (nums[i] === 1) {
     continue;
   } else {
