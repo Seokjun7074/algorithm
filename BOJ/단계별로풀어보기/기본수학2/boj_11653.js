@@ -10,10 +10,8 @@ for (let i = 2; i < N; i++) {
     N = N / i;
     i--;
   }
-  //   console.log(N);
 }
 arr.push(N);
-// console.log(arr);
 
 if (N === 1) {
   console.log("");
