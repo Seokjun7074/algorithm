@@ -10,8 +10,5 @@ function solution(numbers) {
       return total + idx;
     } else return total;
   }, 0);
-  console.log(answer);
   return answer;
 }
-
-solution([1, 2, 3, 4, 6, 7, 8, 0]);
