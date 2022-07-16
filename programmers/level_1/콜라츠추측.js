@@ -5,7 +5,6 @@ function solution(num) {
     else num = num * 3 + 1;
     answer++;
   }
-
   return answer >= 500 ? -1 : answer;
 }
 
