@@ -4,7 +4,6 @@ function solution(n) {
   for (let i = str_num.length - 1; i >= 0; i--) {
     answer.push(Number(str_num[i]));
   }
-  console.log(answer);
   return answer;
 }
 
