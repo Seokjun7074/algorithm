@@ -1,7 +1,6 @@
 import sys
 sys.stdin = open('input.txt', 'r')
 
-
 N = int(input())
 arr = []
 for i in range(N):
