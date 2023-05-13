@@ -1,10 +1,10 @@
 def solution(k, m, score):
     answer = 0
-    box = (len(score)//m)
+    box = len(score) // m
     score.sort(reverse=True)
-    idx = m-1
-    while(box > 0):
-        answer = answer+m*score[idx]
+    idx = m - 1
+    while box > 0:
+        answer = answer + m * score[idx]
         idx += m
         box -= 1
     print(answer)
