@@ -9,7 +9,8 @@ for _ in range(N):
     start, end = map(int, input().split())
     arr.append([start, end])
 
-newArr = sorted(arr, key=lambda x: (x[1], x[0]))
+newArr = sorted(arr, key=lambda x: x[0])
+newArr = sorted(newArr, key=lambda x: x[1])
 
 cnt = 1
 using = newArr[0]
