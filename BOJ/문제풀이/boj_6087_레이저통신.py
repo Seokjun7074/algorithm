@@ -4,50 +4,47 @@ from collections import deque
 input = sys.stdin.readline
 
 W, H = map(int, input().split())
-g = [list(input().strip()) for _ in range(H)]
+g = list(input().rstrip() for _ in range(H))
+C = []
+for i in range(H):
+    for j in range(W):
+        if g[i][j] == "C":
+            C.append((i, j))
 
-# 레이저 시작점과 도착점 찾기
-target = [(i, j) for i in range(H) for j in range(W) if g[i][j] == "C"]
-(start_x, start_y), (end_x, end_y) = target
+(startX, startY), (endX, endY) = C
 
-# 방향: 상, 하, 좌, 우
+v = [list([sys.maxsize] * 4 for _ in range(W)) for _ in range(H)]
+
+
+q = deque()
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
-
-# 방문 배열 (방향별 최소 거울 설치 횟수 저장)
-INF = float("inf")
-visited = [[[INF] * 4 for _ in range(W)] for _ in range(H)]
-
-# BFS 큐
-queue = deque()
-
-# 시작점에서 네 방향으로 출발
 for d in range(4):
-    nx, ny = start_x + dx[d], start_y + dy[d]
+    nx = startX + dx[d]
+    ny = startY + dy[d]
     if 0 <= nx < H and 0 <= ny < W and g[nx][ny] != "*":
-        queue.append((nx, ny, d, 0))  # (x좌표, y좌표, 방향, 거울 설치 횟수)
-        visited[nx][ny][d] = 0
+        q.append((nx, ny, d, 0))  # nx, ny, 방향, 거울 수
 
-while queue:
-    x, y, direction, mirrors = queue.popleft()
 
-    # 도착점에 도달한 경우 최소 거울 개수 반환
-    if (x, y) == (end_x, end_y):
-        print(mirrors)
-        break
+answer = sys.maxsize
+while q:
+    i, j, curD, mirrorCnt = q.popleft()
+    if i == endX and j == endY:
+        answer = min(answer, mirrorCnt)
 
-    # 같은 방향으로 이동 (거울 추가 없음)
-    nx, ny = x + dx[direction], y + dy[direction]
-    if 0 <= nx < H and 0 <= ny < W and g[nx][ny] != "*":
-        if visited[nx][ny][direction] > mirrors:
-            visited[nx][ny][direction] = mirrors
-            queue.appendleft((nx, ny, direction, mirrors))  # 우선 탐색
-
-    # 방향 바뀐
-    for new_direction in range(4):
-        if new_direction != direction:
-            nx, ny = x + dx[new_direction], y + dy[new_direction]
-            if 0 <= nx < H and 0 <= ny < W and g[nx][ny] != "*":
-                if visited[nx][ny][new_direction] > mirrors + 1:
-                    visited[nx][ny][new_direction] = mirrors + 1
-                    queue.append((nx, ny, new_direction, mirrors + 1))
+    for d in range(4):
+        nx = i + dx[d]
+        ny = j + dy[d]
+        if nx < 0 or nx >= H or ny < 0 or ny >= W or g[nx][ny] == "*":
+            continue
+        if v[nx][ny][d] < mirrorCnt:
+            continue
+        if d == curD:  # 같은 방향
+            if v[nx][ny][d] > mirrorCnt:
+                v[nx][ny][d] = mirrorCnt
+                q.appendleft((nx, ny, d, mirrorCnt))  # 직진구간 우선 계산
+        else:  # 다른 방향
+            if v[nx][ny][d] > mirrorCnt + 1:
+                v[nx][ny][d] = mirrorCnt + 1
+                q.append((nx, ny, d, mirrorCnt + 1))
+print(answer)
