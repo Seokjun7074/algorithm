@@ -2,3 +2,8 @@ desktop.ini
 input.txt
 output.txt
 .cph
+
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
