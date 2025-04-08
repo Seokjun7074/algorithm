@@ -90,15 +90,6 @@ def moveShark(shark):
     return move_result
 
 
-def deleteSahrk(nr, nc, move_result):
-    updated_move = []
-    for r, c, s, d, z in move_result:
-        if (r, c) == (nr, nc):
-            continue
-        updated_move.append((r, c, s, d, z))
-    return updated_move
-
-
 for idx in range(C):
     hunt = 0
     # 1. 상어 사냥
