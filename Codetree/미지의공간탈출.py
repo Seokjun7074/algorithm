@@ -72,7 +72,6 @@ def escapeWall():
     while q:
         ci, cj, cnt, cd = q.popleft()
         if wall[cd][ci][cj] == 3:
-            # print("result", cnt, ci, cj, cd)
             return cnt + 1
 
         for d in range(4):
@@ -231,8 +230,6 @@ else:
     print(escapeSpace(exitI, exitJ, escapeTime))
 
 
-# print(wall)
-# print(startWI, startWJ, exitI, exitJ)
 # 미지의 공간과 시간의 벽 존재
 # 타임머신의 위치 (2): 시간의 벽 윗면에 존재
 # 시간의 벽(3), 탈출구(4): 미지의 공간에 존재
