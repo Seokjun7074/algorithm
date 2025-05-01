@@ -1,27 +1,26 @@
-import heapq, sys
-
-
 def solution(n, costs):
     answer = 0
-    bridge = [[] for _ in range(n)]
-    for start, end, w in costs:
-        bridge[start].append((w, end))
-        bridge[end].append((w, start))
+    parents = [i for i in range(n)]
 
-    v = [False] * n
-    q = [(0, 0)]  # 0번 섬부터 시작 (가중치, 번호)
-    heapq.heapify(q)
-    print(bridge)
+    def find(x):
+        if x != parents[x]:
+            parents[x] = find(parents[x])
+        return parents[x]
 
-    while q:
-        cur_w, cur_b = heapq.heappop(q)
-        if v[cur_b]:
-            continue
-        v[cur_b] = True
-        answer += cur_w
+    def union(a, b):
+        root_a = find(a)
+        root_b = find(b)
+        if root_a != root_b:
+            if root_a > root_b:
+                parents[root_a] = root_b
+            else:
+                parents[root_b] = root_a
+            return True
+        return False
 
-        for w, b in bridge[cur_b]:
-            if not v[b]:
-                heapq.heappush(q, (w, b))
+    costs.sort(key=lambda x: x[2])
+    for a, b, c in costs:
+        if union(a, b):
+            answer += c
 
     return answer
