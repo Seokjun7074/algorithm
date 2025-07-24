@@ -1,0 +1,6 @@
+select SUM(G.SCORE) as SCORE, G.EMP_NO, E.EMP_NAME, E.POSITION,E.EMAIL
+from HR_DEPARTMENT D join HR_EMPLOYEES E on D.DEPT_ID=E.DEPT_ID
+join HR_GRADE G on E.EMP_NO = G.EMP_NO
+group by G.EMP_NO
+order by SCORE desc
+limit 1
